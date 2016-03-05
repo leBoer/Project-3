@@ -93,8 +93,9 @@ var Engine = (function(global) {
     function updateEntities(dt) {
         allEnemies.forEach(function(enemy) {
             enemy.update(dt);
+            console.log(enemy);
         });
-        player.update();
+            player.update();
     }
 
     /* This function initially draws the "game level", it will then call
