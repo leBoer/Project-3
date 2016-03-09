@@ -50,13 +50,14 @@ Player.prototype.handleInput = function(e){
     }else if (e == 'down'){
         this.y = this.y + 101;
     }
+console.log(player.x, player.y);
 };
 
 // Now instantiate your objects
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var player = new Player(1,2);
+var player = new Player(202,370);
 console.log(player);
 
 // This listens for key presses and sends the keys to your
