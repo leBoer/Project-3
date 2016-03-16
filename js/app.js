@@ -1,16 +1,33 @@
 // Enemies our player must avoid
-var Enemy = function() {
+
+////////TRYING TO FIX THE ENEMY SPAWN AND MOVEMENT//////////
+var Enemy = function(x, y) {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
+    this.x = x;
+    this.y = y;
+
     this.sprite = 'images/enemy-bug.png';
+    this.speed = Math.random()*7;
+//    var start = start;
+
+//    this.start = Math.floor((Math.random() * 3) + 1);
+
 };
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
+
+    this.x = this.x + (20*this.speed)*dt;
+    if (this.x > 500){
+        this.x = -100;
+        this.speed = Math.random()*7;
+    };
+
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -29,7 +46,6 @@ var Player = function(x, y){
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
-
 };
 
 Player.prototype.update = function(dt){
@@ -41,15 +57,19 @@ Player.prototype.render = function(){
 
 Player.prototype.handleInput = function(e){
     var e = e;
-    if(e == 'left'){
-        player.x = player.x - 101;
-    }else if (e == 'right'){
-        player.x = player.x + 101;
-    }else if (e == 'up'){
-        this.y = this.y - 101;
-    }else if (e == 'down'){
-        this.y = this.y + 101;
-    }
+
+    
+        if(e == 'left'){
+            this.x = this.x - 101;
+        }else if (e == 'right'){
+            this.x = this.x + 101;
+        }else if (e == 'up'){
+            this.y = this.y - 83;
+        }else if (e == 'down'){
+            this.y = this.y + 83;
+        }
+
+
 console.log(player.x, player.y);
 };
 
@@ -57,7 +77,12 @@ console.log(player.x, player.y);
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
 var allEnemies = [];
-var player = new Player(202,370);
+allEnemies[1] = new Enemy(-100, 50);
+allEnemies[2] = new Enemy(-100, 133);
+allEnemies[3] = new Enemy(-100, 216);
+console.log(allEnemies);
+
+var player = new Player(202,375);
 console.log(player);
 
 // This listens for key presses and sends the keys to your
