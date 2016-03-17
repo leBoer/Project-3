@@ -7,14 +7,13 @@ var Enemy = function(x, y) {
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
+
     this.x = x;
     this.y = y;
 
     this.sprite = 'images/enemy-bug.png';
+    //gives a random speed between
     this.speed = Math.random()*7;
-//    var start = start;
-
-//    this.start = Math.floor((Math.random() * 3) + 1);
 
 };
 
@@ -28,6 +27,10 @@ Enemy.prototype.update = function(dt) {
         this.speed = Math.random()*7;
     };
 
+    if (this.x < (player.x + 40) && this.x > (player.x - 40) && this.y < (player.y + 40) && this.y > (player.y - 40)){
+        player.x = 202;
+        player.y = 375;
+    }
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
     // all computers.
@@ -67,8 +70,10 @@ Player.prototype.handleInput = function(e){
             this.y = this.y + 83;
         }
 
-
-console.log(player.x, player.y);
+    if(this.y < 43) {
+        this.x = 202;
+        this.y = 375;
+    }
 };
 
 // Now instantiate your objects
