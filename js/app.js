@@ -13,7 +13,7 @@ var Enemy = function(x, y) {
 
     this.sprite = 'images/enemy-bug.png';
     //gives a random speed between
-    this.speed = Math.random()*7;
+    this.speed = Math.floor((Math.random()*7)+1);
 
 };
 
@@ -24,16 +24,15 @@ Enemy.prototype.update = function(dt) {
     this.x = this.x + (20*this.speed)*dt;
     if (this.x > 500){
         this.x = -100;
-        this.speed = Math.random()*7;
+        this.speed = Math.floor((Math.random()*7)+1);
     };
 
+    // This creates the collision criteria between the player and the bugs
     if (this.x < (player.x + 40) && this.x > (player.x - 40) && this.y < (player.y + 40) && this.y > (player.y - 40)){
         player.x = 202;
         player.y = 375;
+        player.level = 0;
     }
-    // You should multiply any movement by the dt parameter
-    // which will ensure the game runs at the same speed for
-    // all computers.
 };
 
 // Draw the enemy on the screen, required method for game
@@ -49,9 +48,15 @@ var Player = function(x, y){
     this.x = x;
     this.y = y;
     this.sprite = 'images/char-boy.png';
+    this.level = 0;
 };
 
 Player.prototype.update = function(dt){
+    ctx.font = '30px Arial';
+    //ctx.clearRect(100, 100, 505, 606);
+    ctx.clearRect(202, 0, 100, 50);
+    ctx.fillText('Level:' + this.level, 202, 35);
+
 };
 
 Player.prototype.render = function(){
@@ -73,8 +78,11 @@ Player.prototype.handleInput = function(e){
     if(this.y < 43) {
         this.x = 202;
         this.y = 375;
+        this.level++;
     }
 };
+
+
 
 // Now instantiate your objects
 // Place all enemy objects in an array called allEnemies
